@@ -1,0 +1,20 @@
+.array-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .array-item {
+      width: 60px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .bg-warning {
+      background-color: #ffc107 !important;
+    }
+    
+    .bg-info {
+      background-color: #17a2b8 !important;
+    }
+    
