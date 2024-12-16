@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './components/home';
+import Home from './components/Home';
 import BinarySearch from './components/BinarySearch';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
