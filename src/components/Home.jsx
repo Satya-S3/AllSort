@@ -35,9 +35,6 @@ function Home() {
     };
 
     setResponsiveArraySize();
-    window.addEventListener('resize', setResponsiveArraySize);
-
-    return () => window.removeEventListener('resize', setResponsiveArraySize);
   }, []);
 
   const resetBarColors = () => {
