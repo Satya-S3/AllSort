@@ -90,6 +90,10 @@ function Home() {
     createNewArray();
   }, [arraySize]);
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="App">
       <header>
@@ -110,12 +114,13 @@ function Home() {
                 <button
                   id='create'
                   type="button"
-                  className="btn"
+                  className="btn m-2"
                   onClick={() => createNewArray()}
                   disabled={isSorting}
                 >
                   New Array
                 </button>
+                <button id='refresh' type="button" className="btn m-2" onClick={handleRefresh}>Reset</button>
               </div>
 
               <div className="col-12 col-md-4 d-flex flex-column flex-md-row justify-content-center range">
