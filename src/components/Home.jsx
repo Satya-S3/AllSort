@@ -14,16 +14,31 @@ import { useRef } from 'react';
 const delay = (speed) => 320 - speed;
 
 function Home() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [arraySize, setArraySize] = useState(60);
   const [array, setArray] = useState([]);
   const [currSpeed, setCurrSpeed] = useState(60);
-  const speedRef = useRef(currSpeed); 
+  const speedRef = useRef(currSpeed);
   const [isSorting, setIsSorting] = useState(false);
 
   useEffect(() => {
     speedRef.current = currSpeed;
   }, [currSpeed]);
+
+  useEffect(() => {
+    const setResponsiveArraySize = () => {
+      if (window.innerWidth < 768) {
+        setArraySize(25);
+      } else {
+        setArraySize(60);
+      }
+    };
+
+    setResponsiveArraySize();
+    window.addEventListener('resize', setResponsiveArraySize);
+
+    return () => window.removeEventListener('resize', setResponsiveArraySize);
+  }, []);
 
   const resetBarColors = () => {
     const bars = document.querySelectorAll('.bar');
@@ -59,17 +74,17 @@ function Home() {
   };
   const quickSort = async () => {
     setIsSorting(true);
-    const ele = document.querySelectorAll('.bar'); 
-    await quick(0,ele.length - 1,() => delay(speedRef.current),ele);
+    const ele = document.querySelectorAll('.bar');
+    await quick(0, ele.length - 1, () => delay(speedRef.current), ele);
     setIsSorting(false);
   };
   const mergeSort = async () => {
     setIsSorting(true);
-    const ele = document.querySelectorAll('.bar'); 
+    const ele = document.querySelectorAll('.bar');
     await merge(0, ele.length - 1, () => delay(speedRef.current), ele);
     setIsSorting(false);
   };
-  
+
 
   useEffect(() => {
     createNewArray();
@@ -78,14 +93,24 @@ function Home() {
   return (
     <div className="App">
       <header>
-        <h1 align="center" className="bg-danger text-white py-3">SORTING VISUALIZER</h1>
+        <h1 className="text">
+          <span className="letter letter-1">A</span>
+          <span className="letter letter2">L</span>
+          <span className="letter letter-3">G</span>
+          <span className="letter letter-4">O</span>
+          <span className="letter letter-4">R</span>
+          <span className="letter letter-4">I</span>
+          <span className="letter letter-4">T</span>
+          <span className="letter letter-4">M</span>
+        </h1>
         <nav>
-          <div className="container">
+          <div className="container-fluid">
             <div className="row g-3 align-items-center p-3">
               <div className="col-12 col-md-4 d-flex justify-content-center justify-content-md-start">
                 <button
+                  id='create'
                   type="button"
-                  className="btn btn-success"
+                  className="btn"
                   onClick={() => createNewArray()}
                   disabled={isSorting}
                 >
@@ -93,9 +118,10 @@ function Home() {
                 </button>
               </div>
 
-              <div className="col-12 col-md-4 d-flex flex-column flex-md-row justify-content-center gap-3">
-                <span id="size" className="d-block mb-2">
-                  <label htmlFor="arrSize" className="form-label">
+              <div className="col-12 col-md-4 d-flex flex-column flex-md-row justify-content-center range">
+                
+                <span id="size" className="d-flex flex-column align-items-center m-2" >
+                  <label htmlFor="arrSize" className="rangeText form-label mb-1 text-center" style={{ width: "200px" }}>
                     Size: {arraySize}
                   </label>
                   <input
@@ -106,12 +132,13 @@ function Home() {
                     step="1"
                     value={arraySize}
                     onChange={(e) => setArraySize(parseInt(e.target.value))}
-                    className="form-range custom-range"
+                    className="form-range custom-range w-100"
                     disabled={isSorting}
                   />
                 </span>
-                <span id="speed" className="d-block">
-                  <label htmlFor="speedInput" className="form-label">
+
+                <span id="speed" className="d-flex flex-column align-items-center m-2" >
+                  <label htmlFor="speedInput" className="rangeText form-label mb-1 text-center" style={{ width: "200px" }}>
                     Speed: {currSpeed}ms
                   </label>
                   <input
@@ -122,12 +149,13 @@ function Home() {
                     step="1"
                     value={currSpeed}
                     onChange={(e) => setCurrSpeed(parseInt(e.target.value))}
-                    className="form-range custom-range"
+                    className="form-range custom-range w-100"
                   />
                 </span>
               </div>
 
-              <div className="col-12 col-md-4 d-flex flex-wrap justify-content-center justify-content-md-center gap-2">
+
+              <div className="sortBtn col-12 col-md-4 d-flex flex-wrap justify-content-center justify-content-md-center gap-2">
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -169,6 +197,7 @@ function Home() {
                   Merge Sort
                 </button>
                 <button
+                  id='binary'
                   type="button"
                   className="btn btn-warning"
                   onClick={() => navigate("./Binary")}

@@ -31,6 +31,7 @@ const BinarySearch = () => {
             let l = 0;
             let h = array.length - 1;
             let t = parseInt(target, 10);
+            setTarget("");
 
             const searchStep = () => {
                   if (l > h) {
@@ -59,27 +60,47 @@ const BinarySearch = () => {
       };
 
       return (
-            <div className="container text-center mt-5">
-                  <h1 className="mb-4">Binary Search Visualizer</h1>
+            <div className="container-fluid1 text-center">
+                  <header>
+                        <h1 className="text">
+                              <span className="letter letter-1">S</span>
+                              <span className="letter letter2">E</span>
+                              <span className="letter letter-3">A</span>
+                              <span className="letter letter-4">R</span>
+                              <span className="letter letter-4">C</span>
+                              <span className="letter letter-4">H</span>
+                        </h1>
+                  </header>
                   <div className="row justify-content-center align-items-center">
                         <div className="col-md-8 col-sm-12 mb-3">
-                              <button className="btn btn-primary m-2" onClick={generateArray}>Generate Array</button>
+                              <button id="create" className="btn btn-primary m-3" onClick={generateArray}>
+                                    Generate Array
+                              </button>
+
                               <input
                                     type="number"
-                                    className="form-control d-inline w-50 m-2"
+                                    className="form-control d-inline w-50 m-3"
                                     placeholder="Enter target"
                                     value={target}
                                     onChange={(e) => setTarget(e.target.value)}
+                                    onKeyDown={(e) => {
+                                          if (e.key === "Enter") {
+                                                startSearch();
+                                          }
+                                    }}
                               />
-                              <button className="btn btn-success m-2" onClick={startSearch}>Start Search</button>
+                              <button id="search" className="btn btn-success m-3" onClick={startSearch}>
+                                    Start Search
+                              </button>
                         </div>
                   </div>
+
                   <div className="mt-4">
                         <div className="array-container d-flex justify-content-center flex-wrap">
                               {array.map((value, index) => (
                                     <div key={index}
                                           className={`array-item p-3 m-2 border rounded justify-content-center text-center shadow transition-all ${index === currentIndex ? 'bg-warning text-dark scale-up' :
-                                                      index >= low && index <= high ? 'bg-info text-white' : 'bg-light'
+                                                index >= low && index <= high ? 'bg-info text-white' : 'bg-light'
                                                 }`}>
                                           {value}
                                     </div>

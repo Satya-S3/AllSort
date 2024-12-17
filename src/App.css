@@ -1,18 +1,46 @@
 body {
+  padding: 0;
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #c5edff;
 }
 
 .App header {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 70px;
+    font-weight: 600;
+    letter-spacing: 4px;
+  }
+
+  .container-fluid{
+    background-color: #5979a5;
+  }
+
+  #create{
+    background-color:rgb(86, 255, 95);
+    box-shadow: 3px 3px 15px rgb(86, 255, 95);
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    padding: 10px 20px;
+
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+  .rangeText{
+    font-weight: 900;
+  }
+
 }
 
 #container {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  height: 400px;
+  height: 390px;
   max-width: 100%;
   overflow-x: auto;
   padding: 10px;
@@ -24,17 +52,117 @@ body {
   width: calc(100% / 60);
   margin: 0 1px;
   background-color: teal;
+  border: 0.3px solid black;
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
 }
 
+.custom-range:hover::-webkit-slider-thumb {
+  transform: scale(1.3);
+}
+
 .custom-range::-webkit-slider-runnable-track {
   box-shadow: 2px 2px 5px black;
-  background-color:rgb(223, 221, 221);
+  background-color: #1b2431;
 }
+
 .custom-range::-webkit-slider-thumb {
-  background: rgb(0, 81, 230);
+  background: rgb(181, 236, 255);
+  padding: 10px;
 }
+
+/* Text Animation */
+.App {
+  .text {
+    background-color: #1b2431;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Liberty';
+    font-weight: 100;
+    font-size: 6rem;
+    letter-spacing: -0.25em;
+    flex-flow: row;
+
+    .letter {
+      color: #d9fdff;
+      text-shadow: 0 0 2rem #00f0ff;
+      display: inline-block;
+      padding: 10px;
+    }
+
+    .letter2 {
+      transform: translate(-0.2rem,1rem) rotate(10deg);
+      animation: flicker 2s ease-in-out infinite alternate;
+    }
+
+  }
+  .sortBtn{
+    button{
+      background-color:  #a7f9ff;
+      /* box-shadow: 2px 2px 15px  #00f0ff; */
+      border: none;
+      color: black;
+      font-weight: 700;
+
+      &:hover{
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  #binary{
+    background-color: yellow;
+  }
+}
+@keyframes flicker {
+  0% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  5.5% {
+    opacity: 0;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  6% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  6.5% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  7% {
+    opacity: 0;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  8% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(13deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-0.2rem,1rem) rotate(10deg);
+  }
+}
+
+/* Text Animation */
 
 
 @media (max-width: 768px) {
@@ -46,10 +174,16 @@ body {
     width: calc(100% / 40);
   }
 }
+@media (max-width: 600px) {
+  .App{
+    .text{
+      font-size: 2.5rem;
+    }
+  }
+}
 
 @media (max-width: 480px) {
   .bar {
     width: calc(100% / 30);
   }
 }
-
